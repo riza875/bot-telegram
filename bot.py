@@ -11,13 +11,18 @@ def start(update, context):
     
     update.message.reply_photo(
         photo=URL_GAMBAR,
-        caption="🐟 **GUPPY.IO MINING** 🐟\n\nKlik tombol di bawah untuk mulai menambang!\n\n⭐ Dapatkan 50 poin per referral\n💰 1.000 poin = 1 USDT",
+        caption="🐟 **GUPPY.IO MINING** 🐟\n\nKlik tombol di bawah untuk mulai menambang!",
         parse_mode="Markdown",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
-updater = Updater(TOKEN)
-updater.dispatcher.add_handler(CommandHandler("start", start))
-updater.start_polling()
-print("Bot GUPPY.IO berjalan...")
-updater.idle()
+def main():
+    updater = Updater(TOKEN)
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("start", start))
+    updater.start_polling()
+    print("Bot GUPPY.IO berjalan...")
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
