@@ -57,13 +57,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     add_or_update_user(user.id, user.username)
     
-    # Tombol Mini App GUPPY.IO
+    # Tombol Mini App (tanpa gambar dulu)
     keyboard = [[InlineKeyboardButton("🎮 Buka GUPPY.IO", web_app=WebAppInfo(url="https://riza875.github.io/Mini-app-guppy/"))]]
     
-    await update.message.reply_photo(
-        photo="https://i.postimg.cc/cLvqV9zx/b668d18d-0522-4224-9a30-6e90701b02f0.png",
-        caption="🐟 **GUPPY.IO MINING** 🐟\n\nKlik tombol di bawah untuk mulai menambang!",
-        parse_mode="Markdown",
+    await update.message.reply_text(
+        f"🐟 Halo {user.first_name}!\n\nKlik tombol di bawah untuk mulai menambang:",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
@@ -93,7 +91,7 @@ def main():
     app.add_handler(CommandHandler("stats", stats))
     app.add_handler(CommandHandler("users", users))
     
-    print("Bot GUPPY.IO + STATISTIK berjalan...")
+    print("Bot STATISTIK USER berjalan...")
     app.run_polling()
 
 if __name__ == "__main__":
