@@ -1,2 +1,0 @@
-# bot-telegram
-krim pesan 
