@@ -1,7 +1,7 @@
 import sqlite3
 import os
 from datetime import datetime
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo, BotCommand
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 # ========== SETUP DATABASE ==========
@@ -57,7 +57,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     add_or_update_user(user.id, user.username)
     
-    # Tombol Mini App (tanpa gambar dulu)
+    # Tombol Mini App
     keyboard = [[InlineKeyboardButton("🎮 Buka GUPPY.IO", web_app=WebAppInfo(url="https://riza875.github.io/Mini-app-guppy/"))]]
     
     await update.message.reply_text(
@@ -79,13 +79,23 @@ async def users(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total, _ = get_stats()
     await update.message.reply_text(f"Total user yang pernah pakai bot ini: {total} orang")
 
+# ========== SETUP MENU COMMAND ==========
+async def post_init(app: Application):
+    """Menambahkan menu command yang muncul saat user ketik '/'"""
+    await app.bot.set_my_commands([
+        BotCommand("start", "🚀 Launch GUPPY.IO App"),
+        BotCommand("stats", "📊 Lihat statistik pengguna"),
+        BotCommand("users", "👥 Lihat total pengguna"),
+    ])
+    print("Menu command telah diatur!")
+
 # ========== MAIN ==========
 def main():
     setup_db()
     
     token = "8849881003:AAGk1D9_qWME23QXhfLn7q8Q-TTHo6RPxOY"
     
-    app = Application.builder().token(token).build()
+    app = Application.builder().token(token).post_init(post_init).build()
     
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("stats", stats))
