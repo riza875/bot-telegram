@@ -93,7 +93,7 @@ async def post_init(app: Application):
 def main():
     setup_db()
     
-    token = "8849881003:AAGk1D9_qWME23QXhfLn7q8Q-TTHo6RPxOY"
+    token = 
     
     app = Application.builder().token(token).post_init(post_init).build()
     
