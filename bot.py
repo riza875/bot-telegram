@@ -60,7 +60,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [[InlineKeyboardButton("🎮 Buka GUPPY.IO", web_app=WebAppInfo(url="https://riza875.github.io/Mini-app-guppy/"))]]
     
     await update.message.reply_text(
-        f"🐟 Halo {user.first_name}!\n\nKlik tombol di bawah untuk mulai menambang:",
+        f"🐟 Halo {user.first_name}!\n\n🎉Welcome to Guppy.io🎉
+Don't waste time! TO DO NOW!
+Start completing tasks to earn points!
+Or publish your tasks to gain exposure!
+Ready? Then let’s get started!:",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
